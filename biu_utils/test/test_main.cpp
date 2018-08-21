@@ -1,7 +1,14 @@
 #include "biu_file.h"
+#include "biu_tools.h"
 
 
 int main(int argc,char** argv) {
+	char cwd[MAX_PATH];
+	getcwd(cwd, MAX_PATH);
+	std::cout << cwd << std::endl;
+
+	std::cout << tools::Tool::module_folder() << std::endl;
+	chdir(tools::Tool::module_folder());
 	std::string path(argv[0]);
 	std::cout << path << std::endl;
 	io::FILE::clean_path(path);
@@ -24,8 +31,9 @@ int main(int argc,char** argv) {
 	io::FILE::read(content, p.file);
 	std::cout << content << std::endl;
 	LOG("%s", "a;dlkfjasdfajdfaaidjfaod");
-	std::string dir("/test_dir/log/a");
-	io::FILE::mkdir(dir);
+	std::string dir("test_dir/log");
+	//io::FILE::mkdir(dir);
+	io::FILE::deldir(dir);
 
 	sleep(10);
 	return 0;

@@ -9,6 +9,7 @@
 						 io::FILE::write(LOGFILE,buf);
 
 NAMESPACE_BEGIN(io)
+
 class PATH {
 public:
 	std::string dir;
@@ -21,6 +22,7 @@ public:
 		APPEND ,
 		TRUNCATE
 	};
+
 	static void spilt(PATH &path, std::string fullpath);
 	static void clean_path(std::string &path,bool unix_style=true);
 	static bool exist(const std::string &fn);
@@ -32,6 +34,7 @@ public:
 
 	static void mkdir(std::string &dir);
 	static void mkdir(char* dir);
+	static void deldir(std::string &dir);
 
 };
 

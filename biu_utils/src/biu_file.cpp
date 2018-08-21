@@ -125,13 +125,52 @@ bool FILE::change_type(std::string &fn, std::string old_suffix, std::string new_
 void FILE::mkdir(std::string &dir)
 {
 	clean_path(dir);
-	
-	while()
+	size_t pos = dir.size();
 
+	if (!exist(dir)) {
+		while ((pos = dir.rfind('/', pos)) != std::string::npos) {
+
+			std::string parent(dir, 0, pos);
+			//std::cout << parent << std::endl;
+			mkdir(parent);
+			break;
+		}
+		//std::cout << "mkdir:" << dir << std::endl;
+		::mkdir(dir.c_str(), 0775);
+	}
 }
 
-void FILE::mkdir(char * dir)
+void FILE::mkdir(char * _dir)
 {
+	std::string dir(_dir);
+	clean_path(dir);
+	size_t pos = dir.size();
+
+	if (!exist(dir)) {
+		while ((pos = dir.rfind('/', pos)) != std::string::npos) {
+
+			std::string parent(dir, 0, pos);
+			mkdir(parent);
+			break;
+		}
+		::mkdir(dir.c_str(), 0775);
+	}
+}
+
+void FILE::deldir(std::string & dir)
+{
+	if (root_path[dir] == 1) {
+		return;
+	}
+	std::string cmd("rm -rf ");
+	cmd += dir;
+	//std::cout << cmd << std::endl;
+	::FILE* fp = popen(cmd.c_str(), "r");
+	char buf[BUF_SIZE_128] = { 0 };
+	fgets(buf, BUF_SIZE_128, fp);
+	int ret = pclose(fp);
+	std::cout << buf<<"  "<<ret << std::endl;
+
 }
 
 

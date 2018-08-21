@@ -70,11 +70,13 @@
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="src\biu_file.cpp" />
+    <ClCompile Include="src\biu_tools.cpp" />
     <ClCompile Include="test\test_main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\biu_file.h" />
     <ClInclude Include="inc\biu_inc.h" />
+    <ClInclude Include="inc\biu_tools.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
